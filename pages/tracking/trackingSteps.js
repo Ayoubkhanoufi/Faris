@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons';
+import { LoadingOutlined, SmileOutlined, SolutionOutlined, StopOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Button, Typography, message, Steps } from 'antd';
 
 const { Text } = Typography;
@@ -33,15 +33,15 @@ const TrackingSteps = ({Order}) => {
         {
             title:<Text strong>Start loading</Text>,
             content: <span>
-                <Text>From : </Text><br />
-                <Text>To : </Text>
+                <Text>From :{Order.from} </Text><br />
+                <Text>To :{Order.to} </Text>
             </span>,
-            icon: <UserOutlined />
+            icon: <ShoppingCartOutlined />
         },
         {
             title:<Text strong>End loading</Text>,
             content: 'end loading',
-            icon: <UserOutlined />
+            icon: <StopOutlined />
         },
     
     ];

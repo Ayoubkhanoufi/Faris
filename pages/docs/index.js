@@ -43,7 +43,7 @@ const Documents = () => {
   };
 
   const handlerPrint = () => {
-    window.print(pdfFile, "PRINT", "height=800, width= 1000")
+    // window.print('http://www.archeonavale.org/pdf/cordeliere/test.pdf', "PRINT", "height=800, width= 1000")
     // window.open("./sample.pdf");
     // window.open("data:application/pdf;base64, " + "./AttestationPensionPDF.pdf");
   }
@@ -142,26 +142,26 @@ const Documents = () => {
   const Data = [{
     fileName: "Certification_Pdf.pdf",
     size: "8Mo",
-    importDate: '24-03-2022',
+    importDate: '19-09-2022',
     filePath: "",
   },
   {
     fileName: "Docs.pdf",
     size: "14Ko",
-    importDate: '24-03-2022',
+    importDate: '22-05-2022',
     filePath: "",
   },
   {
     fileName: "Certification.pdf",
     size: "10Ko",
-    importDate: '24-03-2022',
+    importDate: '02-03-2022',
     filePath: "",
   },
   
   {
     fileName: "Docs",
     size: "2M",
-    importDate: '24-03-2022',
+    importDate: '24-01-2022',
     filePath: "",
   },]
 
@@ -242,7 +242,8 @@ const Documents = () => {
   };
   return (
     <Row>
-      <Col span={11} >
+      <Col span={13} >
+        <Divider orientation='left'>File uploaded</Divider>
         <Table
           columns={columns}
           dataSource={Data}
@@ -251,7 +252,7 @@ const Documents = () => {
         />
       </Col>
 
-      <Col span={12} push={1}>
+      <Col span={10} push={1}>
         <Card>
           <div>
             <label htmlFor="file">Load from file:</label>{" "}
@@ -263,7 +264,7 @@ const Documents = () => {
           </div>
           <div >
             <Document ref={componentRef} file={file} onLoadSuccess={onDocumentLoadSuccess}>
-              <Page width={400} height={400} pageNumber={pageNumber} />
+              <Page width={300} height={400} pageNumber={pageNumber} />
             </Document>
             {/* <PDFReader url="./exemple.pdf"/> */}
           </div>

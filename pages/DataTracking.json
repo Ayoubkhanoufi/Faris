@@ -11,7 +11,9 @@
     "productionStartDate": "2022-04-24",
     "productionEndtDate": "2022-07-01",
     "productionStatus": "In progress",
-    "orderID": "2JNFKN"
+    "from":"China",
+    "to":"Morocco",
+    "orderID": "ORD332"
   },
   {
     "reference": "35254366",
@@ -24,8 +26,10 @@
     "totalQuantity": 200,
     "productionStartDate": "2022-04-24",
     "productionEndtDate": "2022-07-01",
+    "from":"China",
+    "to":"Morocco",
     "productionStatus": "In progress",
-    "orderID": "DJFIRN"
+    "orderID": "ORD0022"
   },
   {
     "reference": "SSEE43",
@@ -39,7 +43,9 @@
     "productionStartDate": "2022-04-24",
     "productionEndtDate": "2022-07-01",
     "productionStatus": "In progress",
-    "orderID": "OJ4O2300"
+    "from":"Morocco",
+    "to":"Algeria",
+    "orderID": "ORD004"
   },
   {
     "reference": "SSEE43",
@@ -53,7 +59,9 @@
     "productionStartDate": "2022-04-24",
     "productionEndtDate": "2022-07-01",
     "productionStatus": "In progress",
-    "orderID": "OJ4O2300"
+    "from":"US",
+    "to":"Morocco",
+    "orderID": "ORD106"
   },
   {
     "reference": "REF4433",
@@ -67,6 +75,8 @@
     "productionStartDate": "2022-04-24",
     "productionEndtDate": "2022-07-01",
     "productionStatus": "In progress",
-    "orderID": "223SNCK"
+    "from":"India",
+    "to":"China",
+    "orderID": "ORD405"
   }
 ]
