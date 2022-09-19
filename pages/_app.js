@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/globals.css'
+import './assets/css/antd.css'
 
 import '../styles/style.css';
 import Head from 'next/head'

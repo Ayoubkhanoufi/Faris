@@ -1,31 +1,52 @@
 import React, { useRef, useState } from 'react';
-import Link from 'next/link'
-import { SearchOutlined, RightOutlined, EyeOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table, Typography, Row, Avatar, Col, Card } from 'antd';
+import { SearchOutlined, UploadOutlined, EyeOutlined, FilePdfOutlined } from '@ant-design/icons';
+import { Button, Input, Space, Table, Typography, Row, Upload, message, Col, Card, Divider } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
-import dynamic from 'next/dynamic';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
+// pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
 
+// import pdfFile from './sample.pdf';
+import pdfFile2 from './exemple.pdf';
 
 import Highlighter from 'react-highlight-words';
-// import Data from "../Data.json";
 
 const { Text } = Typography;
-import pdf from "./exemple.pdf"
 
 const Documents = () => {
   const [searchText, setSearchText] = useState('');
   // const [Supplier, setSupplier] = useState(Data);
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
-  const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+
+  const [file, setFile] = useState();
+  const [numPages, setNumPages] = useState(null);
+
+
+  const onFileChange = (event) => {
+    console.log(event.target.files[0])
+    setFile(event.target.files[0]);
+  }
+
+  // console.log(schema.toString())
+
+  const onDocumentLoadSuccess = ({ numPages: nextNumPages }) => {
+    setNumPages(nextNumPages);
+  }
+
+  const componentRef = useRef();
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
+
+  const handlerPrint = () => {
+    window.print(pdfFile, "PRINT", "height=800, width= 1000")
+    // window.open("./sample.pdf");
+    // window.open("data:application/pdf;base64, " + "./AttestationPensionPDF.pdf");
+  }
 
   const handleReset = (clearFilters) => {
     clearFilters();
@@ -117,21 +138,33 @@ const Documents = () => {
       ),
   });
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-  }
 
   const Data = [{
-    fileName: "Docs 1",
+    fileName: "Certification_Pdf.pdf",
+    size: "8Mo",
+    importDate: '24-03-2022',
+    filePath: "",
+  },
+  {
+    fileName: "Docs.pdf",
+    size: "14Ko",
+    importDate: '24-03-2022',
+    filePath: "",
+  },
+  {
+    fileName: "Certification.pdf",
     size: "10Ko",
     importDate: '24-03-2022',
     filePath: "",
+  },
+  
+  {
+    fileName: "Docs",
+    size: "2M",
+    importDate: '24-03-2022',
+    filePath: "",
+  },]
 
-  }]
-
-  const FileViewer = dynamic(() => import('react-file-viewer'), {
-    ssr: false
-  });
 
   const columns = [
     {
@@ -139,13 +172,7 @@ const Documents = () => {
       align: 'center',
       render: (_, record) =>
         <Space size="middle">
-          <Avatar
-            style={{
-              backgroundColor: '#94B7CC',
-            }}
-          >
-            S
-          </Avatar>
+          <FilePdfOutlined color='#F50404' />
         </Space>
     },
     {
@@ -153,7 +180,10 @@ const Documents = () => {
       dataIndex: 'fileName',
       key: 'fileName',
       align: 'center',
-      render: () => { <Text> </Text> },
+      render: (fileName) => {
+        <Text >
+          {fileName} lljoj</Text>
+      },
       ...getColumnSearchProps('fileName'),
     },
     {
@@ -173,20 +203,43 @@ const Documents = () => {
       align: 'center',
       render: (_, record) =>
         <Space size="middle">
-          <Link href={`/product/${record.key}`}>
-            <Button
-              type="dashed"
-              shape="round"
-              size="small"
-
-            >
-              <Text strong style={{ fontSize: 13, color: "#4185AE" }} >View more <EyeOutlined /></Text>
-            </Button>
-          </Link>
+          {/* <Link href={`/product/${record.key}`}> */}
+          <Button
+            type="dashed"
+            shape="round"
+            size="small"
+            onClick={handlerPrint}
+          >
+            <Text strong style={{ fontSize: 13, color: "#4185AE" }} >View document <EyeOutlined /></Text>
+          </Button>
+          {/* </Link> */}
         </Space>
     },
 
   ];
+
+
+  const props = {
+    name: 'file',
+    onChange(info) {
+
+      console.log(info.file.originFileObj)
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      setFile(info.file.originFileObj)
+
+      // if (info.file.status === 'done') {
+      //   message.success(`${info.file.name} file uploaded successfully`);
+      // } else if (info.file.status === 'error') {
+      //   message.error(`${info.file.name} file upload failed.`);
+      // }
+    },
+    onRemove(infor) {
+      console.log(infor)
+      setFile(null)
+    }
+  };
   return (
     <Row>
       <Col span={11} >
@@ -197,18 +250,53 @@ const Documents = () => {
           size="small"
         />
       </Col>
+
       <Col span={12} push={1}>
         <Card>
-          <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page pageNumber={pageNumber} />
-          </Document>
-
-          {/* <FileViewer fileType="pdf" filePath="./exemple.pdf" /> */}
+          <div>
+            <label htmlFor="file">Load from file:</label>{" "}
+            {/* <input onChange={onFileChange} type="file" /> */}
+            <Upload {...props}>
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
+            {/* <Button icon={<DownloadOutlined />} size="small" type="file"/> */}
+          </div>
+          <div >
+            <Document ref={componentRef} file={file} onLoadSuccess={onDocumentLoadSuccess}>
+              <Page width={400} height={400} pageNumber={pageNumber} />
+            </Document>
+            {/* <PDFReader url="./exemple.pdf"/> */}
+          </div>
         </Card>
       </Col>
     </Row>
-
   )
+
+
+  // return (
+  //   <>
+  //     <Divider orientation='left'>Document :</Divider>
+  //     <Table
+  //       columns={columns}
+  //       dataSource={Data}
+  //       // pagination={false}
+  //       size="small"
+  //     />
+  //      <Card>
+  //          <div>
+  //            <label htmlFor="file">Load from file:</label>{" "}
+  //            <input onChange={onFileChange} type="file" />
+  //          </div>
+  //          <div>
+  //            <Document ref={componentRef} file={file} onLoadSuccess={onDocumentLoadSuccess}>
+  //              <Page pageNumber={pageNumber} />
+  //            </Document>
+  //            {/* <PDFReader url="./exemple.pdf"/> */}
+  //          </div>
+  //      </Card>
+  //   </>
+
+  // )
 };
 
 export default Documents;

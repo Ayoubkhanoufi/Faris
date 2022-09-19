@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.0.0",
     "antd": "^4.22.8",
+    "less": "^3.13.1",
+    "less-loader": "^11.0.0",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -17,7 +20,9 @@
     "react-highlight-words": "^0.18.0",
     "react-image-magnify": "^2.7.4",
     "react-pdf": "^5.7.2",
-    "react-slick": "^0.29.0"
+    "react-read-pdf": "^2.0.9",
+    "react-slick": "^0.29.0",
+    "react-to-print": "^2.14.7"
   },
   "devDependencies": {
     "@expo/webpack-config": "^0.17.2",

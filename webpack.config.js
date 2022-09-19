@@ -3,7 +3,7 @@ module.exports = async function(env, argv) {
         ...env,
         babel: {
             dangerouslyAddModulePathsToTranspile: ['@ui-kitten/components']
-        }
+        },
     }, argv);
     return config;
 };

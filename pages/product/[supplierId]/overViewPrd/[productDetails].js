@@ -78,7 +78,7 @@ const detailProduct = () => {
               >
                 <Image width={50} height={50} src="https://www.mouser.lu/images/tycoelectronics/lrg/ITP_2040278-2_t.JPG" />
                 <Image width={50} height={50} src="https://sc01.alicdn.com/kf/HTB1V6FADAKWBuNjy1zjq6AOypXaX/221504212/HTB1V6FADAKWBuNjy1zjq6AOypXaX.jpg" />
-                <Image width={50} height={50} src="https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp" />
+                <Image width={50} height={50} src="https://ae01.alicdn.com/kf/HTB17MtNahz1gK0jSZSgq6yvwpXa2/Connecteur-de-capteur-d-acc-l-rateur-prise-de-capteur-de-niveau-de-fluide-de-frein.jpg" />
               </Image.PreviewGroup>
             </div>
 
